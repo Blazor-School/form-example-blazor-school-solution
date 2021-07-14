@@ -1,0 +1,28 @@
+﻿@using Data;
+@page "/basic-form"
+
+<EditForm Model="Product" OnValidSubmit="Submit">
+    <DataAnnotationsValidator></DataAnnotationsValidator>
+    <div>
+        <label>Name:</label>
+        <InputText @bind-Value="Product.Name"></InputText>
+        <ValidationMessage For="() => Product.Name"></ValidationMessage>
+    </div>
+    <div>
+        <label>Price</label>
+        <InputNumber @bind-Value="Product.Price"></InputNumber>
+        <ValidationMessage For="() => Product.Price"></ValidationMessage>
+    </div>
+    <input type="submit" value="Submit"/>
+</EditForm>
+@SubmitText
+
+@code {
+    private Product Product { get; set; } = new();
+    private string SubmitText { get; set; }
+
+    private void Submit()
+    {
+        SubmitText = $"Submitted Data: Product {Product.Name} with the price {Product.Price}";
+    }
+}
